@@ -34,10 +34,19 @@ class Graph extends Component<IProps, {}> {
     // Get element to attach the table from the DOM.
     const elem = document.getElementsByTagName('perspective-viewer')[0] as unknown as PerspectiveViewerElement;
 
+    // ‘view’ is the kind of graph we want to visualize the data with. Initially, we were using a grid type
     elem.setAttribute('view', "y_line");
+
+    // ‘column-pivots’ is what will allow us to distinguish stock ABC from DEF.
     elem.setAttribute('column-pivots', '["stock"]');
+
+    // ‘row-pivots’ takes care of our x-axis.
     elem.setAttribute('row-pivots', '["timestamp"]');
+
+    // ‘columns’ allows us to focus on a particular part of a stock’s data along the y-axis. 
     elem.setAttribute('columns', '["top_ask_price"]');
+
+    // ‘aggregates’ allows us to handle the duplicated data we observed earlier and consolidate it into a single data point.
     elem.setAttribute('aggregates', 
     `{
       "stock": "distinct count",
